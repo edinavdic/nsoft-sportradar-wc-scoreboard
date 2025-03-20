@@ -1,1 +1,0 @@
-# nsoft-sportradar-wc-scoreboard
