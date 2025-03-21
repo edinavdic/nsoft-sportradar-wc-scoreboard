@@ -39,6 +39,10 @@ public class ScoreBoard {
 
     public List<String> getSummary() {
         return matches.values().stream()
+                .sorted( (m1, m2) -> {
+                    int scoreCompare = Integer.compare(m2.getTotalScore(), m1.getTotalScore());
+                    return (scoreCompare != 0) ? scoreCompare : m2.getStartTime().compareTo(m1.getStartTime());
+                })
                 .map(Match::toString)
                 .collect(Collectors.toList());
     }
