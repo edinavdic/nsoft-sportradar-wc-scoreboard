@@ -48,4 +48,11 @@ public class ScoreBoardTest {
         ScoreBoard sb = new ScoreBoard();
         assertThrows(IllegalArgumentException.class, () -> sb.startMatch("Denmark", null));
     }
+
+    @Test
+    void updateScore_UnknownMatch_ThrowsException() {
+        ScoreBoard sb = new ScoreBoard();
+        sb.startMatch("Denmark", "Norway");
+        assertThrows(IllegalArgumentException.class, () -> sb.updateScore("Denmark", "Sweden", 0, 1));
+    }
 }
