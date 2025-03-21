@@ -11,11 +11,10 @@ public class ScoreBoard {
 
     public void startMatch(String homeTeam, String awayTeam) {
         validateTeamNames(homeTeam, awayTeam);
-        var key = genKey(homeTeam, awayTeam);
-        if (matches.containsKey(key)) {
-            throw new IllegalArgumentException("Match is already in play");
+        if (teamAlreadyPlaying(homeTeam, awayTeam)) {
+            throw new IllegalArgumentException("One of the teams is already playing");
         }
-        matches.put(key, new Match(homeTeam, awayTeam));
+        matches.put(genKey(homeTeam, awayTeam), new Match(homeTeam, awayTeam));
     }
 
     public void updateScore(String homeTeam, String awayTeam, int homeTeamScore, int awayTeamScore) {
@@ -55,5 +54,14 @@ public class ScoreBoard {
         if (homeTeam == null || homeTeam.isBlank() || awayTeam == null || awayTeam.isBlank()) {
             throw new IllegalArgumentException("HomeTeam and AwayTeam names cannot be null or empty");
         }
+        if (homeTeam.equals(awayTeam)) {
+            throw new IllegalArgumentException("Team cannot play against itself");
+        }
+    }
+
+    private boolean teamAlreadyPlaying(String homeTeam, String awayTeam) {
+        return matches.values().stream().anyMatch(match ->
+                match.getHomeTeam().equals(homeTeam) || match.getAwayTeam().equals(homeTeam) ||
+                match.getHomeTeam().equals(awayTeam) || match.getAwayTeam().equals(awayTeam));
     }
 }

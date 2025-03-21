@@ -38,6 +38,13 @@ public class ScoreBoardTest {
     }
 
     @Test
+    void finishMatch_MatchNotFound_ThrowsException() {
+        var sb = new ScoreBoard();
+        sb.startMatch("Denmark", "Norway");
+        assertThrows(IllegalArgumentException.class, () -> sb.finishMatch("Denmark", "Sweden"));
+    }
+
+    @Test
     void startMatch_InvalidHomeTeam_ThrowsException() {
         var sb = new ScoreBoard();
         assertThrows(IllegalArgumentException.class, () -> sb.startMatch("", "Norway"));
@@ -50,7 +57,27 @@ public class ScoreBoardTest {
     }
 
     @Test
-    void updateScore_MatchDoesNotExist_ThrowsException() {
+    void startMatch_MatchAlreadyInPlay_ThrowsException() {
+        var sb = new ScoreBoard();
+        sb.startMatch("Denmark", "Norway");
+        assertThrows(IllegalArgumentException.class, () -> sb.startMatch("Denmark", "Norway"));
+    }
+
+    @Test
+    void startMatch_TeamAlreadyPlaying_ThrowsException() {
+        var sb = new ScoreBoard();
+        sb.startMatch("Denmark", "Norway");
+        assertThrows(IllegalArgumentException.class, () -> sb.startMatch("Finland", "Norway"));
+    }
+
+    @Test
+    void startMatch_TeamPlayingItself_ThrowsException() {
+        var sb = new ScoreBoard();
+        assertThrows(IllegalArgumentException.class, () -> sb.startMatch("Finland", "Finland"));
+    }
+
+    @Test
+    void updateScore_MatchNotFound_ThrowsException() {
         var sb = new ScoreBoard();
         sb.startMatch("Denmark", "Norway");
         assertThrows(IllegalArgumentException.class, () -> sb.updateScore("Denmark", "Sweden", 0, 1));

@@ -14,6 +14,9 @@ public class Match {
         if (homeTeam == null || homeTeam.isBlank() || awayTeam == null || awayTeam.isBlank()) {
             throw new IllegalArgumentException("HomeTeam and AwayTeam names cannot be null or empty");
         }
+        if (homeTeam.equals(awayTeam)) {
+            throw new IllegalArgumentException("Team cannot play against itself");
+        }
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
         this.startTime = Instant.now();
