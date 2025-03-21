@@ -52,7 +52,7 @@ public class ScoreBoard {
     }
 
     private void validateTeamNames(String homeTeam, String awayTeam) {
-        if (homeTeam == null || homeTeam.isEmpty() || awayTeam == null || awayTeam.isEmpty()) {
+        if (homeTeam == null || homeTeam.isBlank() || awayTeam == null || awayTeam.isBlank()) {
             throw new IllegalArgumentException("HomeTeam and AwayTeam names cannot be null or empty");
         }
     }

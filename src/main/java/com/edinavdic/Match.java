@@ -11,7 +11,7 @@ public class Match {
     private int awayTeamScore;
 
     public Match(String homeTeam, String awayTeam) {
-        if (homeTeam == null || homeTeam.isEmpty() || awayTeam == null || awayTeam.isEmpty()) {
+        if (homeTeam == null || homeTeam.isBlank() || awayTeam == null || awayTeam.isBlank()) {
             throw new IllegalArgumentException("HomeTeam and AwayTeam names cannot be null or empty");
         }
         this.homeTeam = homeTeam;
