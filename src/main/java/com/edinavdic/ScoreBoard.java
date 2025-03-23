@@ -47,7 +47,9 @@ public class ScoreBoard {
     }
 
     private String genKey(String homeTeam, String awayTeam) {
-        return homeTeam + ":" + awayTeam;
+        var encodeHome = homeTeam.replace(":", "::");
+        var encodeAway = awayTeam.replace(":", "::");
+        return encodeHome + ":" + encodeAway;
     }
 
     private void validateTeamNames(String homeTeam, String awayTeam) {

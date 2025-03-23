@@ -2,6 +2,8 @@
 
 Java library for live football match scores updates, built with Java 17, Maven 3.9, and JUnit 5.
 
+[alternative_solution branch](https://github.com/edinavdic/nsoft-sportradar-wc-scoreboard/tree/alternative_solution) - Alternative implementation where the `Match` class manages its own state and operations while the `ScoreBoard` acts as a factory and summary provider.
+
 ## Features
 - **Start matches** between two teams (initial score 0-0).
 - **Update scores** with absolute values.
