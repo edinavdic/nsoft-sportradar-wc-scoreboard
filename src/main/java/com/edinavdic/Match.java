@@ -9,6 +9,7 @@ public class Match {
     private final Instant startTime;
     private int homeTeamScore;
     private int awayTeamScore;
+    private boolean finished;
 
     public Match(String homeTeam, String awayTeam) {
         if (homeTeam == null || homeTeam.isBlank() || awayTeam == null || awayTeam.isBlank()) {
@@ -22,6 +23,11 @@ public class Match {
         this.startTime = Instant.now();
         this.homeTeamScore = 0;
         this.awayTeamScore = 0;
+        this.finished = false;
+    }
+
+    public boolean isFinished() {
+        return finished;
     }
 
     public String getHomeTeam() {
@@ -49,11 +55,21 @@ public class Match {
     }
 
     public void updateScore(int homeTeamScore, int awayTeamScore) {
+        if (finished) {
+            throw new IllegalStateException("Match is already finished");
+        }
         if (homeTeamScore < 0 || awayTeamScore < 0) {
             throw new IllegalArgumentException("Scores cannot be negative");
         }
         this.homeTeamScore = homeTeamScore;
         this.awayTeamScore = awayTeamScore;
+    }
+
+    public void finishMatch() {
+        if (finished) {
+            throw new IllegalStateException("Match is already finished");
+        }
+        finished = true;
     }
 
     @Override
