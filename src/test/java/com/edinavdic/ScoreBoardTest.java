@@ -14,7 +14,7 @@ public class ScoreBoardTest {
     }
 
     @Test
-    void startTwoMatches_MatchesAreAddedToScoreboard() {
+    void startMatch_TwoMatches_MatchesAreAddedToScoreboard() {
         var sb = new ScoreBoard();
         sb.startMatch("Denmark", "Norway");
         sb.startMatch("Sweden", "Finland");
@@ -27,6 +27,14 @@ public class ScoreBoardTest {
         sb.startMatch("Denmark", "Norway");
         sb.updateScore("Denmark", "Norway", 0, 2);
         assertEquals("Denmark 0 - Norway 2", sb.getSummary().get(0));
+    }
+
+    @Test
+    void startMatch_CaseSensitiveTeams_Allowed() {
+        ScoreBoard sb = new ScoreBoard();
+        sb.startMatch("Denmark", "denmark");
+        sb.startMatch(" France", "France ");
+        assertEquals(2, sb.getSummary().size());
     }
 
     @Test

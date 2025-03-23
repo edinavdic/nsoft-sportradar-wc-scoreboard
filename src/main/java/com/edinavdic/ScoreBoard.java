@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public class ScoreBoard {
 
-    private final Map<String, Match> matches = new HashMap<>(); // ConcurrentHashMap?
+    private final Map<String, Match> matches = new HashMap<>();
 
     public void startMatch(String homeTeam, String awayTeam) {
         validateTeamNames(homeTeam, awayTeam);
@@ -22,7 +22,7 @@ public class ScoreBoard {
         var key = genKey(homeTeam, awayTeam);
         var match = matches.get(key);
         if (match == null) {
-            throw new IllegalArgumentException("Match not found"); // custom exception?
+            throw new IllegalArgumentException("Match not found");
         }
         match.updateScore(homeTeamScore, awayTeamScore);
     }

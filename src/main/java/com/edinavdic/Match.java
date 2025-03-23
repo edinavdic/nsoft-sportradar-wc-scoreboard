@@ -48,7 +48,7 @@ public class Match {
         return homeTeamScore + awayTeamScore;
     }
 
-    public void updateScore(int homeTeamScore, int awayTeamScore) { // sync
+    public void updateScore(int homeTeamScore, int awayTeamScore) {
         if (homeTeamScore < 0 || awayTeamScore < 0) {
             throw new IllegalArgumentException("Scores cannot be negative");
         }
